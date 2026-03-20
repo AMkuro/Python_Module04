@@ -18,6 +18,9 @@ def crisis_handler(filename: str) -> None:
     except OSError:
         response = "Storage system failure detected"
         status = "Crisis handled, hardware check required"
+    except Exception:
+        response = "Unknown system anomaly encountered"
+        status = "Crisis handled, diagnostics initiated"
 
     if content is not None:
         print(f"ROUTINE ACCESS: Attempting access to '{filename}'...")
