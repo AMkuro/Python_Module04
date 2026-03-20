@@ -1,11 +1,13 @@
 def crisis_handler(filename: str) -> None:
     content: str | None = None
-    response: str | None = None
-    status: str | None = None
+    response: str = "Unknown error occurred"
+    status: str = "Crisis handled, cause unknown"
 
     try:
         with open(f"../attachments/{filename}", encoding="us-ascii") as f:
             content = f.read()
+        if not f.closed:
+            print(f"[WARNING] Vault connection not closed: {f.closed}")
     except FileNotFoundError:
         response = "Archive not found in storage matrix"
         status = "Crisis handled, system stable"

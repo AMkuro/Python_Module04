@@ -1,5 +1,6 @@
 def vault_operation(path: str, label: str, write_content: str = "") -> None:
-    with open(path, "w" if write_content else "r", encoding="us-ascii") as f:
+    mode = "w" if write_content else "r"
+    with open(path, mode, encoding="us-ascii") as f:
         print(f"{label} vault opened with failsafe protocols\n")
         print(f"SECURE {label}:")
         if write_content:
@@ -7,7 +8,11 @@ def vault_operation(path: str, label: str, write_content: str = "") -> None:
             print(write_content, end="")
         else:
             print(f.read())
-    print(f"{label} vault sealed.\n")
+    if f.closed:
+        print(f"[INTEGRITY] Vault connection closed: {f.closed}")
+        print(f"{label} vault sealed.\n")
+    else:
+        print(f"[WARNING] Vault connection not closed: {f.closed}")
 
 
 def main() -> None:

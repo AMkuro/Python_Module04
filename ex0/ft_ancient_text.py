@@ -4,12 +4,20 @@ def main() -> None:
     print(f"Accessing Storage Vault: {access_file_name}")
     try:
         f = open(f"../attachments/{access_file_name}", encoding="us-ascii")
-        print("Connection established...\n")
-        sentence = f.read()
-        print("RECOVERED DATA:")
-        print(sentence)
-        f.close()
-        print("\nData recovery complete. Storage unit disconnected.")
+        try:
+            print("Connection established...\n")
+            sentence = f.read()
+            print("RECOVERED DATA:")
+            print(sentence)
+        finally:
+            f.close()
+            if f.closed:
+                print("\nStorage unit disconnected. Data recovery complete.")
+            else:
+                print(
+                    "\n[WARNING] Storage unit not disconnected. "
+                    "Data recovery uncomplete."
+                )
     except FileNotFoundError:
         print("ERROR: Storage vault not found. Run data generator first.")
 
