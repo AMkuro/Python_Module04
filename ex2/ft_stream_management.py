@@ -20,7 +20,7 @@ def main() -> None:
     print()
     output_stdout(f"Archive status from {archivist_id}: {status_report}")
     output_stderr("System diagnostic: Communication channels verified")
-    output_stdout("Data transmission Complete")
+    output_stdout("Data transmission complete")
     print("\nThree-channel communication test successful.")
 
 

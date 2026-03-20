@@ -3,12 +3,14 @@ def main() -> None:
     access_file_name: str = "ancient_fragment.txt"
     print(f"Accessing Storage Vault: {access_file_name}")
     try:
-        with open(f"../attachments/{access_file_name}") as f:
+        with open(
+            f"../attachments/{access_file_name}", encoding="us-ascii"
+        ) as f:
             print("Connection established...\n")
             sentence = f.read()
             print("RECOVERED DATA:")
-            print(f"{sentence}")
-        print("Data recovery complete. Storage unit disconnected.")
+            print(sentence)
+        print("\nData recovery complete. Storage unit disconnected.")
     except FileNotFoundError:
         print("ERROR: Storage vault not found. Run data generator first.")
 

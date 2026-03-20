@@ -3,8 +3,10 @@ def main() -> None:
     new_file_name: str = "new_discovery.txt"
     print(f"Initializing new storage unit: {new_file_name}")
     try:
-        with open(f"../attachments/{new_file_name}", mode="w") as f:
-            print("Storage unit created successfully..\n")
+        with open(
+            f"../attachments/{new_file_name}", encoding="us-ascii", mode="w"
+        ) as f:
+            print("Storage unit created successfully...\n")
             print("Inscribing preservation data...")
             entries: list[str] = [
                 "New quantum algorithm discovered",
@@ -17,7 +19,7 @@ def main() -> None:
                 f.write(f"{entry}\n")
                 print(entry)
                 entry_num += 1
-        print("Data inscription complete. Storage unit sealed.")
+        print("\nData inscription complete. Storage unit sealed.")
         print(f"Archive '{new_file_name}' ready for long-term preservation.")
     except FileNotFoundError:
         print(
