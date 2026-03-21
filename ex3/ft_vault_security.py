@@ -1,18 +1,25 @@
 def vault_operation(path: str, label: str, write_content: str = "") -> None:
-    mode = "w" if write_content else "r"
-    with open(path, mode, encoding="us-ascii") as f:
-        print(f"{label} vault opened with failsafe protocols\n")
-        print(f"SECURE {label}:")
-        if write_content:
-            f.write(write_content)
-            print(write_content, end="")
+    try:
+        mode = "w" if write_content else "r"
+        with open(path, mode, encoding="us-ascii") as f:
+            print(f"{label} vault opened with failsafe protocols\n")
+            print(f"SECURE {label}:")
+            if write_content:
+                f.write(write_content)
+                print(write_content, end="")
+            else:
+                print(f.read())
+        if f.closed:
+            print(f"[INTEGRITY] Vault connection closed: {f.closed}")
+            print(f"{label} vault sealed.\n")
         else:
-            print(f.read())
-    if f.closed:
-        print(f"[INTEGRITY] Vault connection closed: {f.closed}")
-        print(f"{label} vault sealed.\n")
-    else:
-        print(f"[WARNING] Vault connection not closed: {f.closed}")
+            print(f"[WARNING] Vault connection not closed: {f.closed}")
+    except FileNotFoundError:
+        print("Archive not found in storage matrix")
+    except PermissionError:
+        print("Security protocols deny access")
+    except UnicodeDecodeError:
+        print("Archive data contains unreadable encoding")
 
 
 def main() -> None:

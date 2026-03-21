@@ -23,13 +23,12 @@ def main() -> None:
         finally:
             f.close()
             if f.closed:
-                print("\nStorage unit sealed. Data inscription complete.")
+                print("\nData inscription complete. Storage unit sealed.")
             else:
                 print(
                     "\n[WARNING] Storage unit not sealed. "
                     "Data inscription uncomplete."
                 )
-        print("")
         print(f"Archive '{new_file_name}' ready for long-term preservation.")
     except FileNotFoundError:
         print(

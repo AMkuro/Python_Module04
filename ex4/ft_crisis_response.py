@@ -3,11 +3,10 @@ def crisis_handler(filename: str) -> None:
     response: str = "Unknown error occurred"
     status: str = "Crisis handled, cause unknown"
 
+    f = None
     try:
         with open(f"../attachments/{filename}", encoding="us-ascii") as f:
             content = f.read()
-        if not f.closed:
-            print(f"[WARNING] Vault connection not closed: {f.closed}")
     except FileNotFoundError:
         response = "Archive not found in storage matrix"
         status = "Crisis handled, system stable"
@@ -23,6 +22,9 @@ def crisis_handler(filename: str) -> None:
     except Exception:
         response = "Unknown system anomaly encountered"
         status = "Crisis handled, diagnostics initiated"
+    finally:
+        if f is not None and not f.closed:
+            print(f"[WARNING] Vault connection not closed: {f.closed}")
 
     if content is not None:
         print(f"ROUTINE ACCESS: Attempting access to '{filename}'...")
